@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    req.json({message: `Express App is running on port ${port}`});
+    res.json({message: `Express App is running on port ${port}`});
 })
 
 app.use('/api/weblink', weblinkRoutes)
