@@ -1,12 +1,9 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from "react";
 
 function App() {
   return (
-    <div className="App">
-      <div className="text-3xl bg-green-500">
-        MERN Srack
-      </div>
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo iure reprehenderit ad ipsa nemo rem delectus error, at accusantium voluptate reiciendis assumenda dolore laudantium a sunt quasi sed? Ratione, minima!
     </div>
   );
 }
