@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const weblinkRoutes = require('./routes/weblink')
+const mongoose = require('mongoose');
 
 const app = express();
 const port = process.env.PORT
@@ -19,6 +20,12 @@ app.get('/', (req, res) => {
 
 app.use('/api/weblink', weblinkRoutes)
 
-app.listen(port, () => {
-    console.log(`listening on port ${port}`);
-});
+mongoose.connect(process.env.MONGODB)
+.then(() => {
+    app.listen(port, () => {
+        console.log(`listening on port ${port}`);
+    });
+})
+.catch((error) => {
+    console.error(error)
+})
