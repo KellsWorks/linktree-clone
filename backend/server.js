@@ -23,7 +23,7 @@ app.use('/api/weblink', weblinkRoutes)
 mongoose.connect(process.env.MONGODB)
 .then(() => {
     app.listen(port, () => {
-        console.log(`listening on port ${port}`);
+        console.log(`database connected :: listening on port ${port}`);
     });
 })
 .catch((error) => {
