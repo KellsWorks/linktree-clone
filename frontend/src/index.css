@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css?family=Inter');
+
+* {
+  font-family: 'Inter', 'Helvetica', 'Arial', 'system-ui', '-apple-system' !important;
+}
+
