@@ -19,7 +19,7 @@ export default function Register() {
 
                 <h3 className='text-5xl font-bold'>Create your account</h3>
 
-                <p>Choose your Linktree username. You can always change it later.</p>
+                <p className='text-gray-500'>Choose your Linktree username. You can always change it later.</p>
 
                 <CoreInput
                     type={'email'}

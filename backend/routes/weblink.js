@@ -1,24 +1,22 @@
 const express = require('express');
 const router = express.Router();
+const
+{
+    create,
+    read,
+    getWeblink,
+    update,
+    deleteWeblink
+} = require('../controllers/workoutController')
 
-router.get('/', function (req, res){
-    res.json({ message: "all weblinks"});
-});
+router.get('/', read);
 
-router.get('/:id', function (req, res){
-    res.json({ message: "single weblink"});
-});
+router.get('/:id', getWeblink);
 
-router.post('/add', function (req, res){
-    res.json({ message: "add weblink"});
-});
+router.post('/add', create);
 
-router.patch('/:id', function (req, res){
-    res.json({ message: "update weblink"});
-});
+router.patch('/:id', update);
 
-router.delete('/:id', function (req, res){
-    res.json({ message: "delete weblink"});
-});
+router.delete('/:id', deleteWeblink);
 
 module.exports = router;
