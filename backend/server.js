@@ -2,11 +2,16 @@ require('dotenv').config();
 
 const express = require('express');
 const weblinkRoutes = require('./routes/weblink')
-const authRoutes = require('./routes/auth');
+
 const mongoose = require('mongoose');
+
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json());
 
@@ -20,12 +25,13 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/weblink', weblinkRoutes)
-app.use('/api/auth', authRoutes)
+require('./routes/auth')(app);
 
 mongoose.connect(process.env.MONGODB)
 .then(() => {
     app.listen(port, () => {
-        console.log(`database connected :: listening on port ${port}`);
+        console.log(`✅️ database connected`)
+        console.log(`✅️ listening on port: ${port}`);
     });
 })
 .catch((error) => {
