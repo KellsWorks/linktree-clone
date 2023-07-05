@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const weblinkRoutes = require('./routes/weblink')
+const authRoutes = require('./routes/auth');
 const mongoose = require('mongoose');
 
 const app = express();
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/weblink', weblinkRoutes)
+app.use('/api/auth', authRoutes)
 
 mongoose.connect(process.env.MONGODB)
 .then(() => {
