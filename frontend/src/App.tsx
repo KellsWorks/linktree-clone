@@ -1,9 +1,12 @@
 import React from "react";
+import Header from "./components/layouts/landing/Header";
+import Hero from "./components/landing/Hero";
 
 function App() {
   return (
     <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo iure reprehenderit ad ipsa nemo rem delectus error, at accusantium voluptate reiciendis assumenda dolore laudantium a sunt quasi sed? Ratione, minima!
+      <Header/>
+      <Hero/>
     </div>
   );
 }

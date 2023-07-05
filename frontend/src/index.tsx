@@ -11,6 +11,7 @@ import {
 
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import Admin from './pages/admin';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register/>,
+  },
+  {
+    path: "/admin",
+    element: <Admin/>,
   },
 ]);
 
