@@ -31,7 +31,7 @@ const CoreInput: React.FC<CoreInputProps> = ({ type, label, value, onChange }) =
           isInputFocused || inputValue ? 'top-0 text-sm' : 'top-2 text-base'
         } ${
           isInputFocused
-            ? 'text-blue-600'
+            ? 'text-gray-400'
             : 'text-gray-500'
         }`}
       >

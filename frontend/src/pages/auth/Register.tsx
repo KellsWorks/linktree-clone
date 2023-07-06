@@ -42,7 +42,7 @@ export default function Register() {
                         type="email" label="Email" value={email} onChange={(e) => setEmail(e.target.value)}
                     />
 
-                    <p className='text-gray-500'>By clicking <strong>Create account</strong>, you agree to Linktree's <span className="underline">Terms and Conditions</span> and confirm you have read our <span className="underline">Privacy Notice</span>. You may receive offers, news and updates from us.</p>
+                    <p className='text-gray-500'>By clicking <span className='font-medium'>Create account</span>, you agree to Linktree's <span className="underline">Terms and Conditions</span> and confirm you have read our <span className="underline">Privacy Notice</span>. You may receive offers, news and updates from us.</p>
 
                     <CoreButton
                         text={'Create account'}
