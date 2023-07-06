@@ -1,9 +1,70 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { BoltIcon, ChartBarIcon, Cog6ToothIcon, LinkIcon, PaintBrushIcon, PlusIcon } from '@heroicons/react/24/solid'
-import { ShareIcon, MegaphoneIcon } from '@heroicons/react/24/outline'
+import { ArrowUturnRightIcon, BoltIcon, LinkIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { ShareIcon, MegaphoneIcon, ArrowUpOnSquareIcon, Cog6ToothIcon, ChartBarIcon, PaintBrushIcon, PencilIcon, PhotoIcon, StarIcon, CalendarDaysIcon, LockClosedIcon } from '@heroicons/react/24/outline'
+import CoreInput from '../../components/CoreInput'
+import CoreButton from '../../components/CoreButton'
+import '../../additional-styles/switch.css'
 
-export default function index() {
+import HeaderIcon from '../../assets/header.svg'
+
+const interests = new Array<{ name: String, imageUrl: any }>(
+    {
+        name: 'Mobile App',
+        imageUrl: 'https://link-types-assets.production.linktr.ee/mobile-app/icon.svg'
+    },
+    {
+        name: 'Gleam',
+        imageUrl: 'https://link-types-assets.production.linktr.ee/gleam/icon.svg'
+    },
+    {
+        name: 'Video',
+        imageUrl: 'https://link-types-assets.production.linktr.ee/video/icon.svg'
+    },
+    {
+        name: 'Header',
+        imageUrl: HeaderIcon
+    },
+    {
+        name: 'Twitter',
+        imageUrl: 'https://link-types-assets.production.linktr.ee/twitter/icon.svg'
+    },
+    {
+        name: 'TikTok Video',
+        imageUrl: 'https://link-types-assets.production.linktr.ee/tiktok-video/icon.svg'
+    }
+)
+const AdminPage = () => {
+
+    const [isTitleEditing, setIsTitleEditing] = useState<boolean>(false);
+    const [isWeblinkEditing, setWeblinkEditing] = useState<boolean>(false);
+
+    const [title, setTitle] = useState<string>('Job Finder Malawi - Malawian Jobs, Tenders & Opportunities');
+    const [weblink, setWeblink] = useState('jobfindermalawi');
+
+    const [showAdd, setShowAdd] = useState<boolean>(false);
+
+    const handleIconClick = () => {
+        setIsTitleEditing(true);
+    };
+
+    const handleWeblinkIconClick = () => {
+        setWeblinkEditing(true);
+    }
+
+    const handleInputBlur = () => {
+        setIsTitleEditing(false);
+        setWeblinkEditing(false);
+    };
+
+    const handleInputChange = (e: { target: { value: string } }) => {
+        setTitle(e.target.value);
+    };
+
+    const handleWeblinkChange = (e: { target: { value: string } }) => {
+        setWeblink(e.target.value);
+    };
+
     return (
         <div className='bg-gray-100 h-screen p-3'>
             <div className="rounded-full w-full px-3 py-3 flex items-center justify-between bg-white shadow">
@@ -50,14 +111,126 @@ export default function index() {
             <div className="gw-full h-full overflow-y-hidden">
                 <div>
                     <div className="max-w-2xl mx-auto justify-center mt-10">
-                        <button className="flex font-medium p-3 w-full items-center justify-center space-x-2 bg-purple-600 hover:bg-purple-700 rounded-full text-white transition-duration-150">
+
+                        {!showAdd && <button onClick={() => setShowAdd(!showAdd)} className="flex font-medium p-3 w-full items-center justify-center space-x-2 bg-purple-700 hover:bg-purple-800 rounded-full text-white transition-duration-150">
                             <PlusIcon className='w-5 h-5 mr-2' />
                             Add link
-                        </button>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi repellat doloremque et ipsa, natus ad magnam quod ratione inventore at ex corrupti minus sed vitae quis, nostrum nulla esse obcaecati!
+                        </button>}
+
+                        {showAdd && <div className="bg-white rounded-2xl mt-10 transform transition-all duration-150" >
+                            <div className='px-5 py-5'>
+                                <div className="flex items-center justify-between">
+                                    <h3 className='font-semibold'>Enter URL</h3>
+                                    <button onClick={() => setShowAdd(!showAdd)}>
+                                        <XMarkIcon className='w-5 h-5' />
+                                    </button>
+                                </div>
+                                <div className="w-full flex items-center space-x-5 mt-5">
+                                    <CoreInput type={'text'} label={'URL'} value={''} />
+                                    <div className="w-20">
+                                        <CoreButton text={'Add'} type={'button'} color={'primary'} loading={false} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="border-t mt-5 py-10 px-5">
+                                <div className="flex items-center justify-between">
+                                    <h3 className='font-semibold text-gray-500'>Inspired by your interests</h3>
+                                    <button className='text-purple-600 font-medium hover:text-purple-700 hover:underline transition duration-150'>View all &rarr;</button>
+                                </div>
+                                <div className="mt-3 grid grid-cols-6 gap-4">
+                                    {interests.map((interest, index) => (
+                                        <div key={index} className="flex flex-col space-y-2 justify-center items-center">
+                                            <div className='rounded-2xl bg-gray-100 px-3 py-3'>
+                                                <img className='w-10 h-10' src={interest.imageUrl} alt={`${interest.name.toLowerCase()}-icon`} />
+                                            </div>
+                                            <p className="text-sm font-medium">{interest.name}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                        }
+
+                        <div className={showAdd ? `blur-sm mt-10` : `mt-10 blur-0`}>
+                            <div className="rounded-2xl bg-white px-5 py-5">
+                                <div className="flex items-center justify-between">
+                                    <div className="w-full space-y-2">
+                                        {isTitleEditing ? (
+                                            <input
+                                                type="text"
+                                                className="w-full font-medium focus:outline-none focus:ring-none"
+                                                value={title}
+                                                onChange={handleInputChange}
+                                                onBlur={handleInputBlur}
+                                                autoFocus
+                                            />
+                                        ) : (
+                                            <h3 className="flex items-center font-medium">
+                                                {title}
+                                                <button onClick={handleIconClick}>
+                                                    <PencilIcon className='w-5 h-5 ml-2' />
+                                                </button>
+                                            </h3>
+                                        )}
+                                        {isWeblinkEditing ? (
+                                            <input
+                                                type="text"
+                                                className="focus:outline-none focus:ring-none"
+                                                value={weblink}
+                                                onChange={handleWeblinkChange}
+                                                onBlur={handleInputBlur}
+                                            />
+                                        ) : (
+                                            <p className="flex items-center font-medium">
+                                                {weblink}
+                                                <button onClick={handleWeblinkIconClick}>
+                                                    <PencilIcon className='w-5 h-5 ml-2' />
+                                                </button>
+                                            </p>
+                                        )}
+                                    </div>
+                                    <div className="flex items-center space-x-3">
+                                        <ArrowUpOnSquareIcon className='w-5 h-5 text-gray-600' />
+                                        <label className="switch">
+                                            <input type="checkbox" />
+                                            <span className="slider round"></span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div className="flex items-center w-full mt-4">
+                                    <div className="flex items-center space-x-3 text-gray-500">
+                                        <button>
+                                            <ArrowUturnRightIcon className='w-5 h-5' />
+                                        </button>
+                                        <button>
+                                            <PhotoIcon className='w-5 h-5' />
+                                        </button>
+                                        <button>
+                                            <StarIcon className='w-5 h-5' />
+                                        </button>
+                                        <button>
+                                            <CalendarDaysIcon className='w-5 h-5' />
+                                        </button>
+                                        <button>
+                                            <LockClosedIcon className='w-5 h-5' />
+                                        </button>
+                                        <button>
+                                            <ChartBarIcon className='w-5 h-5' />
+                                        </button>
+                                        <div className='flex items-center'>
+                                            0 clicks
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     )
 }
+
+
+export default AdminPage;

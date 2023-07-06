@@ -23,7 +23,7 @@ const CoreInput: React.FC<props> = ({type, label, value}) => {
   };
 
   return (
-    <div className="relative">
+    <div className="w-full relative">
       <label
         className={`absolute left-2 transition-all duration-300 ${
           isInputFocused || inputValue ? 'top-0 text-sm' : 'top-2 text-base'
