@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const weblinkRoutes = require('./routes/weblink')
 
+const cors = require('cors');
+
 const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
@@ -14,6 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json());
+app.use(cors());
 
 app.use((req, res, next) => {
     console.log(req.path, req.method)
