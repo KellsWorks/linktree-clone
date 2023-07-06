@@ -35,7 +35,7 @@ export default function Register() {
             "email": email,
             "password": password
         })
-        .then(() => {
+        .then((response) => {
 
             setLoading(false)
 

@@ -40,7 +40,7 @@ const CoreButton: React.FC<Props> = ({ text, type, loading, color, disabled, onC
       disabled={disabled}
     >
       <p className={loading ? 'hidden' : 'text-center'}>{text}</p>
-      {loading && <TailSpin strokeWidth={3} speed={2} height={30} width={30} />}
+      {loading && <TailSpin strokeWidth={3} speed={2} height={25} width={25} />}
     </button>
   );
 };
