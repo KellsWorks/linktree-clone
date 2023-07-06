@@ -5,9 +5,10 @@ interface CoreInputProps {
   label: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
 }
 
-const CoreInput: React.FC<CoreInputProps> = ({ type, label, value, onChange }) => {
+const CoreInput: React.FC<CoreInputProps> = ({ type, label, value, required, onChange }) => {
   const [inputValue, setInputValue] = useState<string>(value);
   const [isInputFocused, setInputFocused] = useState<boolean>(false);
 
@@ -40,6 +41,7 @@ const CoreInput: React.FC<CoreInputProps> = ({ type, label, value, onChange }) =
       <input
         className="w-full pl-2 pt-4 pb-2 pr-2 bg-gray-100 hover:border-2 rounded-md focus:outline-none focus:border-black transition duration-150"
         type={type}
+        required={required}
         value={inputValue}
         onChange={handleInputChange}
         onFocus={handleInputFocus}
