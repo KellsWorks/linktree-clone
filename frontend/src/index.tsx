@@ -13,7 +13,6 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Admin from './pages/admin';
 import Account from './pages/account';
-import { AuthProvider } from './context/AuthProvider';
 
 const router = createBrowserRouter([
   {
@@ -44,9 +43,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
