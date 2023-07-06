@@ -39,6 +39,8 @@ const AdminPage = () => {
     const [isTitleEditing, setIsTitleEditing] = useState<boolean>(false);
     const [isWeblinkEditing, setWeblinkEditing] = useState<boolean>(false);
 
+    const [newWeblink, setNewWeblink] = useState<string>('')
+
     const [title, setTitle] = useState<string>('Job Finder Malawi - Malawian Jobs, Tenders & Opportunities');
     const [weblink, setWeblink] = useState('jobfindermalawi');
 
@@ -126,7 +128,7 @@ const AdminPage = () => {
                                     </button>
                                 </div>
                                 <div className="w-full flex items-center space-x-5 mt-5">
-                                    <CoreInput type={'text'} label={'URL'} value={''} />
+                                    <CoreInput type={'text'} label={'URL'} value={newWeblink} onChange={(e) => setNewWeblink(e.target.value)} />
                                     <div className="w-20">
                                         <CoreButton text={'Add'} type={'button'} color={'primary'} loading={false} />
                                     </div>

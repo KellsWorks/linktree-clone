@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 
-interface props{
-    type: "text" | "email" | "password" | "number" | "date";
-    label: string;
-    value: string;
+interface CoreInputProps {
+  type: "text" | "email" | "password" | "number" | "date";
+  label: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const CoreInput: React.FC<props> = ({type, label, value}) => {
 
+const CoreInput: React.FC<CoreInputProps> = ({ type, label, value, onChange }) => {
   const [inputValue, setInputValue] = useState<string>(value);
   const [isInputFocused, setInputFocused] = useState<boolean>(false);
 
-  const handleInputChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+    onChange(e);
   };
 
   const handleInputFocus = () => {
