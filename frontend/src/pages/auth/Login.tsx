@@ -35,8 +35,6 @@ export default function Login() {
     })
       .then((response) => {
 
-        console.log(response)
-
         setLoading(false)
 
         dispatch(
