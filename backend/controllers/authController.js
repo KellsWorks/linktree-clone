@@ -1,5 +1,6 @@
 const config = require("../config/auth.config");
 const db = require("../models/user");
+const Profile = require("../models/profile");
 const User = db;
 
 var jwt = require("jsonwebtoken");
@@ -13,16 +14,18 @@ exports.register = async (req, res) => {
       password: bcrypt.hashSync(req.body.password, 8),
     });
 
-    user.save()
-    .then((result) => {
-        res.status(200).json({
-            message: "User was registered successfully!",
-            user: user
-        })
-    })
-    .catch((err) => {
-        res.status(400).json({ message: err.message });
+    await user.save()
+    
+
+    await Profile.create({
+       user,
+       backgroundColor:"Green",
+       ButtonColor:"Green",
+       Logo:"test logo",
+       Headline:"This is my linktree account",
     });
+    
+    res.status(201).json({"message":"successfully created account"});
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

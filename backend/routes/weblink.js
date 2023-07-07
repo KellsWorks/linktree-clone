@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { ensureAuth, ensureGuest } = require('../middleware/routeProtection');
 const
 {
     create,
@@ -9,14 +10,14 @@ const
     deleteWeblink
 } = require('../controllers/workoutController')
 
-router.get('/', read);
+router.get('/', ensureAuth , read);
 
 router.get('/:id', getWeblink);
 
-router.post('/add', create);
+router.post('/add', ensureAuth,  create);
 
-router.patch('/:id', update);
+router.patch('/:id', ensureAuth , update);
 
-router.delete('/:id', deleteWeblink);
+router.delete('/:id', ensureAuth, deleteWeblink);
 
 module.exports = router;
