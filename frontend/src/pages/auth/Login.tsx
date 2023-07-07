@@ -76,6 +76,7 @@ export default function Login() {
 
 
   return (
+    <>
     <div className="w-full grid grid-cols-5">
 
       <div className="col-span-3 order-1">
@@ -139,8 +140,8 @@ export default function Login() {
         <img src={RightSideImage} alt="" className="w-full h-screen object-cover justify-end" />
       </div>
 
-      <ToastContainer />
-
     </div>
+    <ToastContainer />
+    </>
   )
 }
