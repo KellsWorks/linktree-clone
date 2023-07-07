@@ -13,6 +13,9 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Admin from './pages/admin';
 import Account from './pages/account';
+import { Provider } from 'react-redux';
+
+import store, { persistor } from './store'
 
 const router = createBrowserRouter([
   {
@@ -43,7 +46,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
+
     <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 

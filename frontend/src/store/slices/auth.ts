@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AccountResponse } from "../../types";
 
 type State = {
-  token: string | null;
-  refreshToken: string | null;
-  account: AccountResponse | null;
+  access_token: string | null;
+  username: string | null;
+  email: string | null;
+  headline: string | null;
+  logo: string | null;
+  background_color: string | null;
 };
 
-const initialState: State = { token: null, refreshToken: null, account: null };
+const initialState: State = { access_token: null, username: null, email: null, headline: null, logo: null, background_color: null };
 
 const authSlice = createSlice({
   name: "auth",
@@ -15,18 +17,20 @@ const authSlice = createSlice({
   reducers: {
     setAuthTokens(
       state: State,
-      action: PayloadAction<{ token: string; refreshToken: string }>
+      action: PayloadAction<{ access_token: string }>
     ) {
-      state.refreshToken = action.payload.refreshToken;
-      state.token = action.payload.token;
+      state.access_token = action.payload.access_token;
     },
-    setAccount(state: State, action: PayloadAction<AccountResponse>) {
-      state.account = action.payload;
+    setAccount(state: State, action: PayloadAction<any>) {
+      state.username = action.payload.username;
+      state.email = action.payload.email;
+      state.headline = action.payload.headline;
+      state.logo = action.payload.logo;
+      state.background_color = action.payload.background_color
     },
     logout(state: State) {
-      state.account = null;
-      state.refreshToken = null;
-      state.token = null;
+      state.username = null;
+      state.access_token = null;
     },
   },
 });

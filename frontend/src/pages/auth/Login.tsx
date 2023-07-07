@@ -8,6 +8,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ApiService from '../services/ApiService';
 
+import { useDispatch } from 'react-redux'
+import authSlice from '../../store/slices/auth';
+
 export default function Login() {
 
   const navigation = useNavigate()
@@ -17,6 +20,8 @@ export default function Login() {
   const [password, setPassword] = useState<string>('')
 
   const [loading, setLoading] = useState<boolean>(false)
+
+  const dispatch = useDispatch();
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
 
@@ -30,9 +35,22 @@ export default function Login() {
     })
       .then((response) => {
 
+        console.log(response)
+
         setLoading(false)
 
+        dispatch(
+          authSlice.actions.setAuthTokens({
+            access_token: response.data.accessToken,
+          })
+        );
 
+        dispatch(
+          authSlice.actions.setAccount({
+            username: response.data.username,
+            email: response.data.email
+          })
+        )
 
         toast.success('Login successfully!', {
           position: toast.POSITION.TOP_RIGHT,
