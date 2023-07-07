@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUturnRightIcon, BoltIcon, LinkIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import { ShareIcon, MegaphoneIcon, ArrowUpOnSquareIcon, Cog6ToothIcon, ChartBarIcon, PaintBrushIcon, PencilIcon, PhotoIcon, StarIcon, CalendarDaysIcon, LockClosedIcon } from '@heroicons/react/24/outline'
@@ -45,6 +45,8 @@ const AdminPage = () => {
     const [isWeblinkEditing, setWeblinkEditing] = useState<boolean>(false);
 
     const [newWeblink, setNewWeblink] = useState<string>('')
+
+    const [data, setData] = useState<Array<{ title: string, link: string}>>([])
 
     const [title, setTitle] = useState<string>('Job Finder Malawi - Malawian Jobs, Tenders & Opportunities');
     const [weblink, setWeblink] = useState('jobfindermalawi');
@@ -97,6 +99,7 @@ const AdminPage = () => {
             setLoading(false)
             setWeblink("")
             setShowAdd(false)
+            loadWeblinks();
         })
         .catch((error) => {
             toast.error('Unexpected error occurred, please try again!', {
@@ -108,6 +111,20 @@ const AdminPage = () => {
         })
 
     }
+
+    const loadWeblinks = () => {
+        ApiService.get('weblink/jonesk')
+        .then((response) => {
+            setData(response.data.weblinks)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
+    useEffect(() => {
+        loadWeblinks()
+    }, [])
 
     return (
         <>
@@ -196,7 +213,7 @@ const AdminPage = () => {
                             </div>
                             }
 
-                            <div className={showAdd ? `blur-sm mt-10` : `mt-10 blur-0`}>
+                            {data.map((weblink) => (<div className={showAdd ? `blur-sm mt-10` : `mt-10 blur-0`}>
                                 <div className="rounded-2xl bg-white px-5 py-5">
                                     <div className="flex items-center justify-between">
                                         <div className="w-full space-y-2">
@@ -204,14 +221,14 @@ const AdminPage = () => {
                                                 <input
                                                     type="text"
                                                     className="w-full font-medium focus:outline-none focus:ring-none"
-                                                    value={title}
+                                                    value={weblink.title}
                                                     onChange={handleInputChange}
                                                     onBlur={handleInputBlur}
                                                     autoFocus
                                                 />
                                             ) : (
                                                 <h3 className="flex items-center font-medium">
-                                                    {title}
+                                                    {weblink.title}
                                                     <button onClick={handleIconClick}>
                                                         <PencilIcon className='w-5 h-5 ml-2' />
                                                     </button>
@@ -221,13 +238,13 @@ const AdminPage = () => {
                                                 <input
                                                     type="text"
                                                     className="focus:outline-none focus:ring-none"
-                                                    value={weblink}
+                                                    value={weblink.link}
                                                     onChange={handleWeblinkChange}
                                                     onBlur={handleInputBlur}
                                                 />
                                             ) : (
                                                 <p className="flex items-center font-medium">
-                                                    {weblink}
+                                                    {weblink.link}
                                                     <button onClick={handleWeblinkIconClick}>
                                                         <PencilIcon className='w-5 h-5 ml-2' />
                                                     </button>
@@ -269,7 +286,7 @@ const AdminPage = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>))}
                         </div>
                     </div>
                 </div>

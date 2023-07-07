@@ -10,9 +10,9 @@ const
     deleteWeblink
 } = require('../controllers/workoutController')
 
-router.get('/', ensureAuth , read);
+router.get('/:username', ensureAuth , read);
 
-router.get('/:id', getWeblink);
+// router.get('/:id', getWeblink);
 
 router.post('/add', ensureAuth,  create);
 

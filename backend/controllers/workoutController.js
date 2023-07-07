@@ -8,7 +8,7 @@ const create = async (req, res) => {
     const { title, link } = req.body;
 
     try {
-        const weblink = await Weblink.create({title, link, user:req.user})
+        const weblink = await Weblink.create({title, link, user: req.user})
         res.status(200).json({message: 'Weblink created successfully'});
     } catch (error) {
         res.status(400).json({error: error.message});
@@ -18,7 +18,6 @@ const create = async (req, res) => {
 const read = async (req, res) => {
 
     const user = await User.find({username:req.params.username}).lean();
-
 
     const weblinks = await Weblink.find({user}).sort({createdAt: -1})
 
@@ -63,7 +62,7 @@ const update = async (req, res) => {
 
     try{
       const weblink = await Weblink.findById(req.params.id).lean()
-     
+
 
       weblink.title = req.body.title,
       weblink.link = req.body.link
